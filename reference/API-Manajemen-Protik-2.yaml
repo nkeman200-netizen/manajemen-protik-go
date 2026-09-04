@@ -1,0 +1,87 @@
+openapi: 3.1.0
+x-stoplight:
+  id: tdz8qxe8mzmst
+info:
+  title: API Manajemen Protik
+  version: '1.0'
+  summary: ''
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /api/v1/login:
+    post:
+      summary: Post login
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-login
+      x-stoplight:
+        id: rpqr9xpg7lo0k
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items: {}
+    parameters: []
+components:
+  schemas: {}
+  requestBodies:
+    LoginReq:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+                x-stoplight:
+                  id: lytrpj3u8nv1j
+              password:
+                type: string
+                x-stoplight:
+                  id: cwzquvbusne4h
+  responses:
+    BaseResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - message
+            properties:
+              status:
+                type: string
+                x-stoplight:
+                  id: dmgfq82qng96w
+              message:
+                type: string
+                x-stoplight:
+                  id: gly0nyjguk62b
+    LoginData:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                x-stoplight:
+                  id: 4if3rtxbgu711
+                properties:
+                  token:
+                    type: string
+                    x-stoplight:
+                      id: d2qbms4i7jwsl
