@@ -18,8 +18,27 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    x-stoplight:
+                      id: 9k4nubm0dw0c6
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/LoginData'
+                        x-stoplight:
+                          id: lce1znk0uuplh
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                Example 1:
+                  value:
+                    status: '400'
+                    message: Email atau Password salah
       operationId: get-login
       x-stoplight:
         id: rpqr9xpg7lo0k
@@ -27,61 +46,317 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items: {}
+              $ref: '#/components/schemas/LoginReq'
     parameters: []
-components:
-  schemas: {}
-  requestBodies:
-    LoginReq:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - email
-              - password
-            properties:
-              email:
-                type: string
-                x-stoplight:
-                  id: lytrpj3u8nv1j
-              password:
-                type: string
-                x-stoplight:
-                  id: cwzquvbusne4h
-  responses:
-    BaseResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - status
-              - message
-            properties:
-              status:
-                type: string
-                x-stoplight:
-                  id: dmgfq82qng96w
-              message:
-                type: string
-                x-stoplight:
-                  id: gly0nyjguk62b
-    LoginData:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                x-stoplight:
-                  id: 4if3rtxbgu711
-                properties:
-                  token:
-                    type: string
+  api/v1/user:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
                     x-stoplight:
-                      id: d2qbms4i7jwsl
+                      id: trtogteblyu4b
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/User'
+                        x-stoplight:
+                          id: 4qwf2g4txrz6v
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+      operationId: get-user
+      x-stoplight:
+        id: 7e1366lntckwx
+      security: []
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: '3'
+          in: query
+          name: user_id
+          description: 'self user id '
+    parameters: []
+  /api/v1/user/profile:
+    put:
+      summary: edit profile
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                    x-stoplight:
+                      id: 0q3fbvh2h8el6
+                  - type: object
+                    x-stoplight:
+                      id: bdinmkdgo0npc
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/User'
+                        x-stoplight:
+                          id: 0yf5nokf3zuuu
+      operationId: put-api-v1-profile
+      x-stoplight:
+        id: 5g4lc23hxnusp
+      requestBody:
+        content:
+          application/x-tex:
+            schema:
+              $ref: '#/components/schemas/UpdateProfileReq'
+      security: []
+    parameters: []
+  /api/v1/user/password:
+    put:
+      summary: edit password
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+      operationId: put-api-v1-user-password
+      x-stoplight:
+        id: aeygaq2o3gz7v
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  x-stoplight:
+                    id: m3ezzyg1bnoft
+                current_password:
+                  type: string
+                  x-stoplight:
+                    id: j21hjpmcqkemi
+  /api/v1/users:
+    get:
+      summary: users index
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                    x-stoplight:
+                      id: r5he59utmwt47
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        x-stoplight:
+                          id: rch0d6edvux7n
+                        items:
+                          $ref: '#/components/schemas/User'
+                          x-stoplight:
+                            id: 0mscndrmq2grb
+      operationId: get-api-v1-users
+      x-stoplight:
+        id: w9cl9avuaovkg
+      security: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: all
+          description: 'kalo ambil semua, ini untuk fitur absen'
+        - schema:
+            type: string
+          in: query
+          name: paginate
+          description: kalo ambil degnan paginate
+components:
+  schemas:
+    User:
+      title: User
+      x-stoplight:
+        id: sg12vy806habh
+      type: object
+      required:
+        - id
+        - name
+        - email
+        - password
+        - role
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: punwp8o8glzzy
+        name:
+          type: string
+          x-stoplight:
+            id: xbzn3wddest1v
+        email:
+          type: string
+          x-stoplight:
+            id: 1wq7urfyua90v
+        password:
+          type: string
+          x-stoplight:
+            id: 6ogkuh41qveg0
+        role:
+          type: string
+          x-stoplight:
+            id: fcczvde4wantt
+        prodi:
+          type: string
+          x-stoplight:
+            id: 2nw24chn8te31
+        phone:
+          type: string
+          x-stoplight:
+            id: rjpouokra4gzx
+        angkatan:
+          type: integer
+          x-stoplight:
+            id: mzd3k5mtn82h8
+        address:
+          type: string
+          x-stoplight:
+            id: 24vjdrwvhvfzh
+        avatar_url:
+          type: string
+          x-stoplight:
+            id: hnbqwar6w17vn
+        deleted_at:
+          type: string
+          x-stoplight:
+            id: kwp3tha5l56gd
+      description: ''
+    LoginReq:
+      title: LoginReq
+      x-stoplight:
+        id: j5x5r3s0zfiqm
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          x-stoplight:
+            id: 7wam2kks5499o
+        password:
+          type: string
+          x-stoplight:
+            id: rmyfol04u40yu
+    BaseResponse:
+      title: BaseResponse
+      x-stoplight:
+        id: x40g9w6td1arw
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: string
+          x-stoplight:
+            id: l776zel9fp7c0
+        message:
+          type: string
+          x-stoplight:
+            id: l549pfoidjm0p
+    LoginData:
+      title: LoginData
+      x-stoplight:
+        id: 15u1mabmx18ae
+      type: object
+      properties:
+        token:
+          type: string
+          x-stoplight:
+            id: wcse321ojpxgt
+    ValidationError:
+      title: ValidationError
+      x-stoplight:
+        id: z797i60xkn5fz
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+          x-stoplight:
+            id: ank33kwipcsth
+        - type: object
+          x-stoplight:
+            id: adqltsdc3gydh
+          properties:
+            errors:
+              type: object
+              x-stoplight:
+                id: 0s9c5pyqul9lx
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+      examples:
+        - status: string
+          message: string
+          errors:
+            nama:
+              - Nama tidak boleh kurang dari 3 huruf
+            harga_satuan_beli:
+              - Harga tidak boleh kurang dari 0
+            '':
+              - string
+    UpdateProfileReq:
+      title: UpdateProfileReq
+      x-stoplight:
+        id: bnw0uqp0wl43g
+      type: object
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: s05ovrilj5gfm
+        email:
+          type: string
+          x-stoplight:
+            id: 2b15gxe65an2e
+        nim:
+          type: string
+          x-stoplight:
+            id: z4q9t6wm6mnhq
+        phone:
+          type: string
+          x-stoplight:
+            id: f2weodw2yy740
+        address:
+          type: string
+          x-stoplight:
+            id: jzo4e7y018he5
+  requestBodies: {}
+  responses: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: induk
