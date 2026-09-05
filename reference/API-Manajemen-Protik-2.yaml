@@ -25,7 +25,7 @@ paths:
                       id: 9k4nubm0dw0c6
                     properties:
                       data:
-                        $ref: '#/components/schemas/LoginData'
+                        $ref: '#/components/schemas/DataLogin'
                         x-stoplight:
                           id: lce1znk0uuplh
         '400':
@@ -86,9 +86,9 @@ paths:
       security: []
       parameters:
         - schema:
-            type: string
-            format: uuid
-            example: '3'
+            type: integer
+            format: int64
+            example: 3
           in: query
           name: user_id
           description: 'self user id '
@@ -178,6 +178,10 @@ paths:
                           $ref: '#/components/schemas/User'
                           x-stoplight:
                             id: 0mscndrmq2grb
+                      meta:
+                        $ref: '#/components/schemas/DataMeta'
+                        x-stoplight:
+                          id: o3h9chwdkhk3u
       operationId: get-api-v1-users
       x-stoplight:
         id: w9cl9avuaovkg
@@ -193,6 +197,884 @@ paths:
           in: query
           name: paginate
           description: kalo ambil degnan paginate
+        - schema:
+            type: string
+          in: query
+          name: page
+    post:
+      summary: users sync
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    x-stoplight:
+                      id: fxk8rpfrc9kvn
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/BaseResponseSync'
+                        x-stoplight:
+                          id: 01v2pdfesdeix
+      operationId: post-api-v1-users
+      x-stoplight:
+        id: ebo2nktxtfvlq
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_id:
+                  type: string
+                  x-stoplight:
+                    id: cejt0zbk3iyv0
+                  format: uuid
+  /api/v1/event:
+    get:
+      summary: get index events
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                    x-stoplight:
+                      id: dipy2pbimtqy2
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        x-stoplight:
+                          id: g05oeoqmxn8li
+                        items:
+                          $ref: '#/components/schemas/Events'
+                          x-stoplight:
+                            id: 40vbna5qjlwbb
+      operationId: get-api-v1-event
+      x-stoplight:
+        id: g4bd7ihnixoxa
+      security: []
+      parameters: []
+    post:
+      summary: event sync
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                    x-stoplight:
+                      id: ss3o6gokq9wwk
+                  - type: object
+                    x-stoplight:
+                      id: doq73nym1yo4r
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/BaseResponseSync'
+                        x-stoplight:
+                          id: gpvejpbml4hor
+      operationId: post-api-v1-event
+      x-stoplight:
+        id: va1h42h257gge
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_id:
+                  type: string
+                  x-stoplight:
+                    id: tud1izmh3s4gb
+                  format: uuid
+  /api/v1/documents:
+    get:
+      summary: index
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                    x-stoplight:
+                      id: 0nfslrlcpjulf
+                  - type: object
+                    x-stoplight:
+                      id: jkt7wsoza6fn1
+                    properties:
+                      data:
+                        type: array
+                        x-stoplight:
+                          id: pdfjocmjs0iz0
+                        items:
+                          $ref: '#/components/schemas/Documents'
+                          x-stoplight:
+                            id: jq6kw5qdqd6oi
+                      meta:
+                        $ref: '#/components/schemas/DataMeta'
+                        x-stoplight:
+                          id: m6bucqsoqu2ka
+      operationId: get index documents
+      x-stoplight:
+        id: mcg2k2siix1bn
+      security: []
+      requestBody:
+        content: {}
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: event_id
+        - schema:
+            type: string
+          in: query
+          name: subject
+        - schema:
+            type: string
+          in: query
+          name: type
+        - schema:
+            type: string
+          in: query
+          name: destination
+        - schema:
+            type: string
+          in: query
+          name: origin
+        - schema:
+            type: string
+          in: query
+          name: recipient
+        - schema:
+            type: string
+          in: query
+          name: document_number
+        - schema:
+            type: string
+          in: query
+          name: page
+    post:
+      summary: documents sync
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    x-stoplight:
+                      id: hcd3hk092ryb5
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/BaseResponseSync'
+                        x-stoplight:
+                          id: pfbbhcwfp2vvv
+      operationId: post-api-v1-documents
+      x-stoplight:
+        id: on26j1z8zqe01
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_id:
+                  type: string
+                  x-stoplight:
+                    id: dbr9y2q97u1yc
+                  format: uuid
+            examples:
+              Example 1:
+                value:
+                  - id: string
+                    perihal: string
+                    jenis: string
+                    kepada: string
+                    keterangan: string
+                    activity_date: string
+                    draft_url: string
+                    scann_url: string
+  Settings:
+    get:
+      summary: index
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    x-stoplight:
+                      id: 5upv69la2z5xz
+                    properties:
+                      data:
+                        type: array
+                        x-stoplight:
+                          id: 2fb7s4jmxbyp8
+                        items:
+                          $ref: '#/components/schemas/Agendas'
+                          x-stoplight:
+                            id: 8hoxq8igy51lh
+                      meta:
+                        $ref: '#/components/schemas/DataMeta'
+                        x-stoplight:
+                          id: qq9ggfnfu9eh6
+      operationId: get-api-v1-Agenda
+      x-stoplight:
+        id: wdzj6khg5u19j
+      security: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: event_id
+        - schema:
+            type: string
+          in: query
+          name: name
+        - schema:
+            type: string
+          in: query
+          name: location
+        - schema:
+            type: string
+          in: query
+          name: start_date
+        - schema:
+            type: string
+          in: query
+          name: end_date
+        - schema:
+            type: string
+          in: query
+          name: status
+        - schema:
+            type: string
+          in: query
+          name: page
+    post:
+      summary: sync agenda
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    x-stoplight:
+                      id: 5cy8nndaq78a3
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/BaseResponseSync'
+                        x-stoplight:
+                          id: 0p2hexjy75rmq
+      operationId: post-api-v1-Agenda
+      x-stoplight:
+        id: 9wlr4x3yjhdj7
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_id:
+                  type: string
+                  x-stoplight:
+                    id: x6tl76n4qw0m7
+                  format: uuid
+    parameters: []
+  /api/v1/finances:
+    get:
+      summary: index finances
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    x-stoplight:
+                      id: 10631hm4iewp4
+                    properties:
+                      data:
+                        type: array
+                        x-stoplight:
+                          id: qxy3zycrjvszz
+                        items:
+                          $ref: '#/components/schemas/Finances'
+                          x-stoplight:
+                            id: 8llfhcvmtrv88
+                      meta:
+                        $ref: '#/components/schemas/DataMeta'
+                        x-stoplight:
+                          id: ch6j65gz18l4v
+              examples:
+                Example 1:
+                  value:
+                    status: string
+                    message: string
+                    data:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        subject: string
+                        date: '2019-08-24'
+                        unit_price: 0
+                        unit: string
+                        qty: 0
+                        total: 0
+                        payment_method: transfer
+                        event_id: a7a26ff2-e851-45b6-9634-d595f45458b7
+                        receipt_url: string
+                    meta:
+                      current_page: 0
+                      limit: 0
+                      total_item: 0
+                      total_page: 0
+      operationId: get-api-v1-finances
+      x-stoplight:
+        id: zwaei4y0fdaf3
+      security: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: page
+        - schema:
+            type: string
+          in: query
+          name: limit
+        - schema:
+            type: string
+          in: query
+          name: unit_price
+        - schema:
+            type: string
+          in: query
+          name: payment_methode
+        - schema:
+            type: string
+          in: query
+          name: start_date
+        - schema:
+            type: string
+          in: query
+          name: end_date
+        - schema:
+            type: string
+          in: query
+          name: event_id
+        - schema:
+            type: string
+          in: query
+          name: subject
+        - schema:
+            type: string
+          in: query
+          name: unit
+        - schema:
+            type: string
+          in: query
+          name: page
+      requestBody:
+        content: {}
+    post:
+      summary: finances sync
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                    x-stoplight:
+                      id: 1az72gapx3d5h
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/BaseResponseSync'
+                        x-stoplight:
+                          id: 1pkf6tox7vhlh
+      operationId: post-api-v1-finances
+      x-stoplight:
+        id: r03i0a3bnidv2
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_id:
+                  type: string
+                  x-stoplight:
+                    id: cd7tftv3dmx5q
+                  format: uuid
+  /api/v1/monthly-dues:
+    get:
+      summary: index kas
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    x-stoplight:
+                      id: sw90tcz9mr0rd
+                    properties:
+                      data:
+                        type: array
+                        x-stoplight:
+                          id: m4i6t1mo9ri53
+                        items:
+                          $ref: '#/components/schemas/ResponseMonthlyDues'
+                          x-stoplight:
+                            id: cmfy1462cym1v
+      operationId: get-api-v1-mounthly_dues
+      x-stoplight:
+        id: l83ggas8oavn6
+      security: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: division
+        - schema:
+            type: string
+          in: query
+          name: nim
+        - schema:
+            type: string
+          in: query
+          name: nama
+    parameters: []
+    post:
+      summary: sync monthly dues
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - x-stoplight:
+                      id: cd69q3hz41vpi
+                    type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/BaseResponseSync'
+                        x-stoplight:
+                          id: 0gc6pw6poth6r
+              examples:
+                Example 1:
+                  value:
+                    status: string
+                    message: string
+                    data:
+                      total_fetched: 0
+                      inserted: 0
+                      updated: 0
+      operationId: post-api-v1-monthly-dues
+      x-stoplight:
+        id: 678xj31g1yo0v
+      security: []
+  /api/v1/archives:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    x-stoplight:
+                      id: 5f8dj6ifaoqun
+                    properties:
+                      data:
+                        type: array
+                        x-stoplight:
+                          id: mxyup7hqtorxq
+                        items:
+                          $ref: '#/components/schemas/Archives'
+                          x-stoplight:
+                            id: 7r78g0azj3zfp
+      operationId: get-api-v1-archives
+      x-stoplight:
+        id: xfnvzs2uon6hw
+      security: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: name
+    post:
+      summary: Your POST endpoint
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+      operationId: post-api-v1-archives
+      x-stoplight:
+        id: kb3nf1g28so9h
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqArchives'
+    delete:
+      summary: Your DELETE endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+      operationId: delete-api-v1-archives
+      x-stoplight:
+        id: jbrwgzyxo93o6
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: id
+    put:
+      summary: Your PUT endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+      operationId: put-api-v1-archives
+      x-stoplight:
+        id: yjkh1ub2022w4
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqArchives'
+  /api/v1/settings:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    x-stoplight:
+                      id: ftfyocl80k1ga
+      operationId: get-api-v1-settings
+      x-stoplight:
+        id: 7dufybod6c9bh
+      security: []
+    post:
+      summary: Your POST endpoint
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+      operationId: post-api-v1-settings
+      x-stoplight:
+        id: 8kp8kaepszt9s
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  x-stoplight:
+                    id: qo70avezxc0c5
+                value:
+                  type: string
+                  x-stoplight:
+                    id: 2mot71ldiixfs
+  /api/v1/warnings:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    x-stoplight:
+                      id: ipfhvhtvp0uh2
+                    properties:
+                      data:
+                        type: array
+                        x-stoplight:
+                          id: 14yhlc4qpc8wh
+                        items:
+                          $ref: '#/components/schemas/Warnings'
+                          x-stoplight:
+                            id: 8bccblwrl6erk
+      operationId: get-api-v1-warnings
+      x-stoplight:
+        id: hxixuenoeikrj
+    post:
+      summary: Your POST endpoint
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+      operationId: post-api-v1-warnings
+      x-stoplight:
+        id: 5e876zxqmoj03
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqWarning'
+    put:
+      summary: Your PUT endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+      operationId: put-api-v1-warnings
+      x-stoplight:
+        id: yhbfba1ar0gyj
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqWarning'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: id
+    delete:
+      summary: Your DELETE endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+      operationId: delete-api-v1-warnings
+      x-stoplight:
+        id: ullr0rbe6fpp6
+      security: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: id
+  /api/v1/dashboard/statistics:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    personal_dues:
+                      unpaid_months: 0
+                    agenda_participation:
+                      - title: Rapat Evaluasi
+                        rate: 85
+                    financial_health:
+                      total_balance: 15000000
+                      chart_data:
+                        Kas Umum:
+                          - name: Sep 2026
+                            Pemasukan: 1000000
+                            Pengeluaran: 250000
+                        Dies Natalis 2026:
+                          - name: Sep 2026
+                            Pemasukan: 5000000
+                            Pengeluaran: 2000000
+                properties:
+                  personal_dues:
+                    type: object
+                    properties:
+                      unpaid_months:
+                        type: integer
+                  agenda_participation:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        rate:
+                          type: integer
+                  financial_health:
+                    type: object
+                    properties:
+                      total_balance:
+                        type: integer
+                      chart_data:
+                        type: object
+                        additionalProperties:
+                          x-stoplight:
+                            id: r6u394e7hj355
+                          type: array
+                          items:
+                            x-stoplight:
+                              id: pl3tcldbk8a8n
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                x-stoplight:
+                                  id: jn1ore6m36pj6
+                              pemasukan:
+                                type: number
+                                x-stoplight:
+                                  id: i6tt36ttxf3gr
+                                format: double
+                              pengeluaran:
+                                type: number
+                                x-stoplight:
+                                  id: rlag7ryq9xecw
+                                format: double
+              examples:
+                Example 1:
+                  value:
+                    personal_dues:
+                      unpaid_months: 0
+                    agenda_participation:
+                      - title: string
+                        rate: 0
+                    financial_health:
+                      total_balance: 0
+                      chart_data:
+                        property1:
+                          - name: string
+                            pemasukan: -1.7976931348623157e+308
+                            pengeluaran: -1.7976931348623157e+308
+                        property2:
+                          - name: string
+                            pemasukan: -1.7976931348623157e+308
+                            pengeluaran: -1.7976931348623157e+308
+      operationId: get-api-v1-dashboard-statistics
+      x-stoplight:
+        id: 33porqcgfk0lz
+      security: []
+  /api/v1/dashboard/upcoming-agenda:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  upcoming_agendas:
+                    type: array
+                    x-stoplight:
+                      id: 25jhf95emxtub
+                    items:
+                      $ref: '#/components/schemas/Agendas'
+                      x-stoplight:
+                        id: immi7v0bw690b
+      operationId: get-api-v1-dashboard-upcoming-agenda
+      x-stoplight:
+        id: xb6wcazo7kn6a
+  '/api/v1/warnings/{warning}/read':
+    parameters:
+      - schema:
+          type: string
+        name: warning
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-api-v1-warnings-warning-read
+      x-stoplight:
+        id: 26hni2408nski
 components:
   schemas:
     User:
@@ -251,6 +1133,10 @@ components:
           type: string
           x-stoplight:
             id: kwp3tha5l56gd
+        division_id:
+          type: string
+          x-stoplight:
+            id: 8thd54wz3g762
       description: ''
     LoginReq:
       title: LoginReq
@@ -286,7 +1172,7 @@ components:
           type: string
           x-stoplight:
             id: l549pfoidjm0p
-    LoginData:
+    DataLogin:
       title: LoginData
       x-stoplight:
         id: 15u1mabmx18ae
@@ -352,6 +1238,401 @@ components:
           type: string
           x-stoplight:
             id: jzo4e7y018he5
+    Events:
+      title: Events
+      x-stoplight:
+        id: 9vdmd1bbq8ri4
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 6n9dcdnhk6xk9
+        name:
+          type: string
+          x-stoplight:
+            id: jiubafepgyrc8
+        start_date:
+          type: string
+          x-stoplight:
+            id: emvdsecd93wkj
+          format: date
+        budget:
+          type: number
+          x-stoplight:
+            id: teqenl7sjdvuc
+          format: double
+        drive_url:
+          type: string
+          x-stoplight:
+            id: 8yg4tfmyr4xyl
+        agenda_sync:
+          type: string
+          x-stoplight:
+            id: jh322s81iyw05
+        finance_sync:
+          type: string
+          x-stoplight:
+            id: mjewcgx3b2tkd
+        committee_sync:
+          type: string
+          x-stoplight:
+            id: 5aees6kjzhtxq
+        document_sync:
+          type: string
+          x-stoplight:
+            id: 5arf9t55dih91
+        end_date:
+          type: string
+          x-stoplight:
+            id: fb8d1ftjlg0ik
+          format: date
+    Documents:
+      title: Documents
+      x-stoplight:
+        id: f5tmkyjvgi1nc
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 7oo9k6wwlcyeh
+          format: uuid
+        subject:
+          type: string
+          x-stoplight:
+            id: z9nwbxw6w20eo
+        type:
+          type: string
+          x-stoplight:
+            id: vuy0lb7qbjv3k
+        recipient:
+          type: string
+          x-stoplight:
+            id: cnf8wowhvroqz
+        description:
+          type: string
+          x-stoplight:
+            id: yzvcouqhnl7cu
+        activity_date:
+          type: string
+          x-stoplight:
+            id: 9afipajaws3gh
+          format: date
+        draft_url:
+          type: string
+          x-stoplight:
+            id: hzkmo02rzfv0q
+        scann_url:
+          type: string
+          x-stoplight:
+            id: tycpy4wydwgao
+        event_id:
+          type: string
+          x-stoplight:
+            id: suqfxexkf0b4t
+    Agendas:
+      title: Agenda
+      x-stoplight:
+        id: d3zdsielb8spw
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 8nsoi3mhrr8s5
+          format: uuid
+        event_id:
+          type: string
+          x-stoplight:
+            id: sja823yotjyv8
+          format: uuid
+        name:
+          type: string
+          x-stoplight:
+            id: 5n1qg8cqs9yi2
+        start_date:
+          type: string
+          x-stoplight:
+            id: a3050rhg11so6
+          format: date
+        end_date:
+          type: string
+          x-stoplight:
+            id: 75wq0u1bxkc2t
+          format: date
+        minutes_url:
+          type: string
+          x-stoplight:
+            id: 1wmwjjoi1dj9u
+        location:
+          type: string
+          x-stoplight:
+            id: 0vcxc9svhmf3m
+        status:
+          type: string
+          x-stoplight:
+            id: z2g99kb13bxzs
+    Finances:
+      title: Finances
+      x-stoplight:
+        id: qhdwimyqnta0h
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 2h1a0la1f65ur
+          format: uuid
+        subject:
+          type: string
+          x-stoplight:
+            id: rto5316i1e6r9
+        date:
+          type: string
+          x-stoplight:
+            id: 7z9g4ox4oeisu
+          format: date
+        unit_price:
+          type: number
+          x-stoplight:
+            id: blgwgks09d0lc
+          format: double
+        unit:
+          type: string
+          x-stoplight:
+            id: pm13zos9mau2y
+        qty:
+          type: integer
+          x-stoplight:
+            id: cebhkis3bc0ud
+          format: int64
+        total:
+          type: number
+          x-stoplight:
+            id: 1b6v5f2x43t1w
+          format: double
+        payment_method:
+          x-stoplight:
+            id: y2dzz8lqdawku
+          enum:
+            - transfer
+            - cash
+            - reimburst
+        event_id:
+          type: string
+          x-stoplight:
+            id: svfk4r8nkcufp
+          format: uuid
+        receipt_url:
+          type: string
+          x-stoplight:
+            id: xklq8kjhf80wm
+    DataMeta:
+      title: DataMeta
+      x-stoplight:
+        id: rfhaufix06823
+      type: object
+      properties:
+        current_page:
+          type: integer
+          x-stoplight:
+            id: kw28yi68yt5pc
+        limit:
+          type: integer
+          x-stoplight:
+            id: j18g4hzpfkyv7
+        total_item:
+          type: integer
+          x-stoplight:
+            id: wzin264y5t26p
+        total_page:
+          type: integer
+          x-stoplight:
+            id: ppe2rq096ts22
+    BaseResponseSync:
+      title: BaseResponseSync
+      x-stoplight:
+        id: jbev4fwsxk31i
+      type: object
+      properties:
+        total_fetched:
+          type: integer
+          x-stoplight:
+            id: qra5qk8sikqdb
+        inserted:
+          type: integer
+          x-stoplight:
+            id: 4zfgn9yt6guou
+        updated:
+          type: integer
+          x-stoplight:
+            id: l9c5np2sgz1r0
+    MonthlyDues:
+      title: MounthlyDues
+      x-stoplight:
+        id: 86xmjnno03wqn
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: e7x6grq0bx343
+          format: uuid
+        user_id:
+          type: string
+          x-stoplight:
+            id: gut0qkhapi0sj
+          format: uuid
+        month:
+          type: integer
+          x-stoplight:
+            id: mgcv0853qy8fh
+        year:
+          type: integer
+          x-stoplight:
+            id: 60t3p1mm2xzvh
+        amount:
+          type: number
+          x-stoplight:
+            id: 31ca0patjmspb
+          format: double
+    ResponseMonthlyDues:
+      title: ResponseMonthlyDues
+      x-stoplight:
+        id: q1nzqx8b03db3
+      allOf:
+        - $ref: '#/components/schemas/MonthlyDues'
+        - type: object
+          x-stoplight:
+            id: hkuq43rot7ah0
+          properties:
+            nama:
+              type: string
+              x-stoplight:
+                id: 5rchoe2pzjq8a
+            nim:
+              type: string
+              x-stoplight:
+                id: g2dp1mb1dgxvm
+            division:
+              type: string
+              x-stoplight:
+                id: ugkq56ovx9waf
+    Archives:
+      title: Archives
+      x-stoplight:
+        id: mf1drmgem52aq
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: gv8w20b2e2uf4
+        periode:
+          type: string
+          x-stoplight:
+            id: 8lmkcex7wml2w
+        name:
+          type: string
+          x-stoplight:
+            id: gn2ncuu6jst7k
+        drive_url:
+          type: string
+          x-stoplight:
+            id: now2doqjnhrbj
+    ReqArchives:
+      title: ReqArchives
+      x-stoplight:
+        id: 85f8rrayk7pee
+      type: object
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: fuo0f8frqwg8r
+        periode:
+          type: string
+          x-stoplight:
+            id: 3efdyhhqy5le7
+        drive_url:
+          type: string
+          x-stoplight:
+            id: rmqr0bolpnjbb
+    Settings:
+      title: Settings
+      x-stoplight:
+        id: b9y0t7ghlzg16
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: scjysni5ci8qk
+        key:
+          type: string
+          x-stoplight:
+            id: gcjc0hwngtj92
+        value:
+          type: string
+          x-stoplight:
+            id: 05o36l4ukkm2g
+        type:
+          type: string
+          x-stoplight:
+            id: tnayg3fciv8ws
+        description:
+          type: string
+          x-stoplight:
+            id: 91u3rcvs06l7e
+    Warnings:
+      title: Warnings
+      x-stoplight:
+        id: vk80jtm26i53u
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: q6f0hfa2h834m
+        date:
+          type: string
+          x-stoplight:
+            id: 4urzhwrnr49y9
+        Reason:
+          type: string
+          x-stoplight:
+            id: mnamd5bg5k1dy
+        user_id:
+          type: string
+          x-stoplight:
+            id: aknvyfumbyp3m
+        admin_id:
+          type: string
+          x-stoplight:
+            id: j4tet1hj30rwq
+        read_at:
+          type: string
+          x-stoplight:
+            id: e19tauce68fws
+    ReqWarning:
+      title: ReqWarning
+      x-stoplight:
+        id: q1kqo5bvtncl3
+      type: object
+      properties:
+        Reason:
+          type: string
+          x-stoplight:
+            id: 8aygrd3anl8tk
+        date:
+          type: string
+          x-stoplight:
+            id: 80s7pesec75ee
+        user_id:
+          type: string
+          x-stoplight:
+            id: 7uzhmctgczeoi
   requestBodies: {}
   responses: {}
   securitySchemes:
