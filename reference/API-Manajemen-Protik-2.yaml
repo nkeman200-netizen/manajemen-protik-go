@@ -1137,7 +1137,14 @@ components:
           type: string
           x-stoplight:
             id: 8thd54wz3g762
-      description: ''
+        is_coordinator:
+          type: string
+          x-stoplight:
+            id: 8qw499qwxucas
+        is_pembina:
+          type: string
+          x-stoplight:
+            id: vzuim614j7c4f
     LoginReq:
       title: LoginReq
       x-stoplight:
